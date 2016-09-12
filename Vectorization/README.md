@@ -67,7 +67,7 @@ cat autovec.optrpt
 Auto-vectorization with GCC:
 
 ```
-gcc autovec.c -O3 -ftree-vectorizer-verbose=1 -S -o autovecGCC
+gcc autovec.c -O3 -ftree-vectorizer-verbose=1 -o autovecGCC -g -march=native
 ```
 
 loop that do not auto vectorize (icc)
@@ -80,7 +80,7 @@ cat novec.optrpt
 loop that do not auto vectorize (gcc)
 
 ```
-gcc novec.c -O3 -ftree-vectorizer-verbose=1 -S -o novecGCC
+gcc novec.c -O3 -ftree-vectorizer-verbose=1 -o novecGCC -g -march=native
 ```
 
 dynamic allocation - aligned
