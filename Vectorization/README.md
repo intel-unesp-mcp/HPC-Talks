@@ -64,11 +64,23 @@ icc autovec.c -o autovec -vec-report=6 -g -O3 -xhost
 cat autovec.optrpt
 ```
 
-loop that do not auto vectorize
+Auto-vectorization with GCC:
+
+```
+gcc autovec.c -O3 -ftree-vectorizer-verbose=1 -S -o autovecGCC
+```
+
+loop that do not auto vectorize (icc)
 
 ```
 icc novec.c -o novec -vec-report=6 -g -O3
 cat novec.optrpt
+```
+
+loop that do not auto vectorize (gcc)
+
+```
+gcc novec.c -O3 -ftree-vectorizer-verbose=1 -S -o novecGCC
 ```
 
 dynamic allocation - aligned
