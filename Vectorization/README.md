@@ -67,7 +67,13 @@ cat autovec.optrpt
 Auto-vectorization with GCC:
 
 ```
-gcc autovec.c -O3 -ftree-vectorizer-verbose=2 -o autovecGCC -g -march=native
+gcc autovec.c -O3 -ftree-vectorizer-verbose=2 -o autovecGCC -g
+```
+
+Auto-vectorization with GCC Using the newest ISA:
+
+```
+gcc autovec.c -O3 -ftree-vectorizer-verbose=2 -o autovecGCC -g -march=native 
 ```
 
 loop that do not auto vectorize (icc)
