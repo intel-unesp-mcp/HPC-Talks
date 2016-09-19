@@ -28,30 +28,61 @@
 #ifdef USE_THR
 void multiply0(int msize, int tidx, int numt, TYPE a[][NUM], TYPE b[][NUM], TYPE c[][NUM], TYPE t[][NUM])
 { 
-	int i,j,k;
+//	int i,j,k;
 
 // Basic serial implementation
+  //  for(i=0; i<msize; i++) {
+    //    for(j=0; j<msize; j++) {
+    //	    for(k=0; k<msize; k++) {
+//				c[i][j] = c[i][j] + a[i][k] * b[k][j];
+//			}
+//		}
+//	} 
+
+
+        int i,j,k;
+
+        // Basic parallel implementation
+//        #pragma omp parallel for collapse (2)
     for(i=0; i<msize; i++) {
+          for(k=0; k<msize; k++) {
+        #pragma simd
         for(j=0; j<msize; j++) {
-    	    for(k=0; k<msize; k++) {
-				c[i][j] = c[i][j] + a[i][k] * b[k][j];
-			}
-		}
-	} 
+
+                                c[i][j] = c[i][j] + a[i][k] * b[k][j];
+                        }
+                }
+        }
+
+
 }
 
 void multiply1(int msize, int tidx, int numt, TYPE a[][NUM], TYPE b[][NUM], TYPE c[][NUM], TYPE t[][NUM])
 {
-	int i,j,k;
 
-// Naive implementation 
-    for(i=tidx; i<msize; i=i+numt) {
+        int i,j,k;
+
+        // Basic parallel implementation
+//        #pragma omp parallel for collapse (2)
+    for(i=0; i<msize; i++) {
+          for(k=0; k<msize; k++) {
+        #pragma simd
         for(j=0; j<msize; j++) {
-    	    for(k=0; k<msize; k++) {
-					c[i][j] = c[i][j] + a[i][k] * b[k][j];
-			}
-		}
-	} 
+
+                                c[i][j] = c[i][j] + a[i][k] * b[k][j];
+                        }
+                }
+        }
+
+//	int i,j,k;
+// Naive implementation 
+//    for(i=tidx; i<msize; i=i+numt) {
+  //      for(j=0; j<msize; j++) {
+    //	    for(k=0; k<msize; k++) {
+//					c[i][j] = c[i][j] + a[i][k] * b[k][j];
+//			}
+//		}
+//	} 
 }
 void multiply2(int msize, int tidx, int numt, TYPE a[][NUM], TYPE b[][NUM], TYPE c[][NUM], TYPE t[][NUM])
 {
@@ -176,7 +207,7 @@ void multiply1(int msize, int tidx, int numt, TYPE a[][NUM], TYPE b[][NUM], TYPE
 	int i,j,k;
 
 	// Basic parallel implementation
-	#pragma omp parallel for
+	//#pragma omp parallel for
     for(i=0; i<msize; i++) {
           for(k=0; k<msize; k++) {
         #pragma simd
